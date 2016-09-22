@@ -1,0 +1,17 @@
+<header>
+  <h1>Products</h1>
+
+	  <ul class="actions">
+	    <li><%= link_to "New Product", new_product_path,
+	      class: "new" %></li>
+	  </ul>
+</header>
+
+<div id="products">
+  <% if @products.each do |product| %>
+    <h2><%= link_to product.name, product %></h2>
+    <p><%= product.description %></p>
+  <% end.empty? %>
+    <p>No products</p>
+  <% end %>
+</div>

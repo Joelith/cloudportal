@@ -1,0 +1,17 @@
+<header>
+  <h1>Environments</h1>
+
+	  <ul class="actions">
+	    <li><%= link_to "Request Environment", products_path,
+	      class: "new" %></li>
+	  </ul>
+</header>
+
+<div id="environments">
+  <% if @environments.each do |environment| %>
+    <h2><%= link_to environment.name, environment %></h2>
+    <p><%= environment.description %></p>
+  <% end.empty? %>
+    <p>No environments. Request one now</p>
+  <% end %>
+</div>
