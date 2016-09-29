@@ -1,0 +1,10 @@
+<%= simple_form_for([project, environment]) do |f| %>
+
+	<%= f.input :name %>
+	<%= f.input :description %>
+	<%= f.input :start_date %>
+	<%= f.input :end_date %>
+	<%= f.association :product %>
+	
+	<%= f.button :submit, class: "btn-primary" %>
+<% end %>

@@ -7,7 +7,8 @@ class CreateEnvironments < ActiveRecord::Migration[5.0]
       t.boolean :approved
       t.text :description
       t.references :product, foreign_key: true
-
+      t.references :project, foreign_key: true
+      
       t.timestamps
     end
   end

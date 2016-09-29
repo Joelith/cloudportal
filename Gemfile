@@ -35,6 +35,8 @@ gem 'simple_form', git: 'https://github.com/kesha-antonov/simple_form', branch: 
 gem "devise"
 gem "pundit", "~> 0.3.0"
 gem "fog-oraclecloud"
+gem "cocoon"
+gem "enum_help"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

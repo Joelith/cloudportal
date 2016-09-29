@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921110146) do
+ActiveRecord::Schema.define(version: 20160928055019) do
+
+  create_table "cloud_components", force: :cascade do |t|
+    t.string   "type"
+    t.text     "config"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_cloud_components_on_product_id"
+  end
+
+  create_table "cloud_instances", force: :cascade do |t|
+    t.string   "type"
+    t.string   "name"
+    t.text     "init_config"
+    t.integer  "environment_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["environment_id"], name: "index_cloud_instances_on_environment_id"
+  end
 
   create_table "environments", force: :cascade do |t|
     t.string   "name"
@@ -19,16 +38,33 @@ ActiveRecord::Schema.define(version: 20160921110146) do
     t.boolean  "approved"
     t.text     "description"
     t.integer  "product_id"
+    t.integer  "project_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["product_id"], name: "index_environments_on_product_id"
+    t.index ["project_id"], name: "index_environments_on_project_id"
   end
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.float    "budget"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rate_cards", force: :cascade do |t|
+    t.string   "provider"
+    t.string   "key"
+    t.float    "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

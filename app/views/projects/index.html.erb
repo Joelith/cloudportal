@@ -1,0 +1,15 @@
+<header>
+  <h1>Projects</h1>
+</header>
+<ul class="actions">
+  <li><%= link_to "Create Project", new_project_path,
+    class: "new" %></li>
+</ul>
+
+<div id="project">
+  <% if @projects.each do |project| %>
+    <h2><%= link_to project.name, project %></h2>
+  <% end.empty? %>
+    <p>No Projects.</p>
+  <% end %>
+</div>

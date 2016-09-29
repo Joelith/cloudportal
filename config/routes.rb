@@ -4,9 +4,19 @@ Rails.application.routes.draw do
   get 'compute_instances/index'
 
   devise_for :users
-	root "environments#index"
+	root "projects#index"
 
-	resources :products
+	resources :products do
+		resources :cloud_components
+		resources :oracle_database_components, controller: 'cloud_components', type: 'OracleDatabaseComponent'  
+	end
 	resources :compute_instances
-	resources :environments
+	resources :projects do
+		resources :environments do
+			resources :cloud_instances
+			resources :oracle_cloud_database, controller: 'cloud_instances', type: 'OracleCloudDatabase'
+		end
+	end
+
+	resources :rate_cards
 end

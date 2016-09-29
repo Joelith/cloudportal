@@ -1,0 +1,46 @@
+<div id="product">
+ <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+    <li class="breadcrumb-item"><%= link_to @project.name, @project %></li>
+    <li class="breadcrumb-item active"><%= @environment.name%></li>
+  </ol>
+  <header>
+    <h1><%= @environment.name %></h1>
+    <ul class="actions">
+      <li><%= link_to "Delete Environment", [@project, @environment], method: :delete,
+data: { confirm: "Are you sure you want to delete this environment. This will de-provision all associated cloud instances?"},
+class: "delete" %></li>
+	  </ul>
+  </header>
+  <%= simple_format(@environment.description) %>
+
+  Start Date: <%= @environment.start_date %>
+  <br/>End Date: <%= @environment.end_date %>
+  <br/>Product: <%= @environment.product.name %>
+  <br/>Estimated Cost: <%= number_to_currency(@environment.total_cost) %>
+  <h3>Instances</h3>
+  <table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Provider</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Cost per month</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @environment.cloud_instances.each do |instance| %>
+      <tr>
+        <td><%= link_to instance.name, [@project, @environment, instance] %></td>
+        <td><%= instance.provider %></td>
+        <td><%= instance.cloud_type %></td>
+        <td><%= instance.status %></td>
+        <td><%= number_to_currency(instance.month_cost) %></td>
+        <td></td> 
+      </tr>
+    <% end %>
+  </tbody>
+  <table>
+</div>

@@ -1,0 +1,27 @@
+<div id="component">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+    <li class="breadcrumb-item"><%= link_to @product.name, @product %></li>
+    <li class="breadcrumb-item active"><%= @component.pretty_type %></li>
+  </ol>
+
+  <header>
+    <h1><%= @component.pretty_type %></h1>
+    <ul class="actions">
+	    <li><%= link_to "Edit Component", [:edit, @product, @component],
+	      class: "edit" %></li>
+      <li><%= link_to "Delete Component", [@product, @component], method: :delete,
+data: { confirm: "Are you sure you want to delete this component?"},
+class: "delete" %></li>
+	  </ul>
+  </header>
+  <ul class="list-group">
+  <% @component.config.each do |key, value| %>
+    <li class="list-group-item"><strong>
+      <%= key %>
+    </strong>
+      <%= value %>
+    </li>
+  <% end %>
+  </ul>
+</div>

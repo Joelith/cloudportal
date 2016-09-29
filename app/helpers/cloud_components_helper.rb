@@ -1,0 +1,2 @@
+module CloudComponentsHelper
+end
