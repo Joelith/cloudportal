@@ -6,9 +6,8 @@
 	<li>%ENV% - The name of the environment this will be configured for</li>
 	<li>%ENV_8% or %ENV_4%- The first 8 or 4 characters of the environment</li>
 </ul>
-	<%= f.input :type, as: :hidden, input_html: {name: "cloud_component[type]" } %>
 
-<%= render @component.form_partial_to_render, f:f, product: @product, component: @component, attributes: @attributes %>
+<%= render 'fields', f:f, product: @product, component: @component, attributes: @attributes %>
 
 <br/>
 	<%= f.button :submit, 'Save', class: "btn-primary" %>

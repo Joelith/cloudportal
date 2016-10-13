@@ -37,11 +37,9 @@ class OracleCloudDatabase < CloudInstance
 
 	def month_cost
 		cost = 0
-		if init_config['edition'] == 'EE' then
-			if init_config['level'] == 'HP' then
-				rc = RateCard.where("provider = ? AND key = ?", provider, 'Database Cloud Service EE HP').first
+		if init_config['edition'] == 'EE_EP' then
+				rc = RateCard.where("provider = ? AND key = ?", provider, 'Database Cloud Service Enterprise Edition Extreme Performance').first
 				rc ? cost = rc.value : 0
-			end
 		end
 		cost
 	end

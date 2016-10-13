@@ -17,7 +17,7 @@ class RateCardsController < ApplicationController
 
 	  if @rate_card.save
 	    flash[:notice] = "Rate Card has been created."
-	    redirect_to @rate_card
+	    redirect_to rate_card_path
 	  else
   	  flash.now[:alert] = "Rate Card has not been created."
 	    render "new"

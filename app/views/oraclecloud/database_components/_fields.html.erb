@@ -1,0 +1,11 @@
+<%= f.input :service_name %>
+<%= f.input :description %>
+<%= f.input :edition, :label_method=> lambda { |item| "#{item.first.upcase}" } %>
+<%= f.input :shape %>
+<%= f.input :version %>
+<%= f.input :level, :label_method=> lambda { |item| "#{item.first.upcase}" }  %>
+<%= f.input :subscription_type, :label_method=> lambda { |item| "#{item.first.upcase}" }  %>
+<%= f.input :ssh_key %>
+<%= f.input :backup_destination %>
+<%= f.input :admin_password %>
+

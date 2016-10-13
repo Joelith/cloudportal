@@ -1,5 +1,5 @@
 module Oraclecloud
-	class DatabasesController < ApplicationController
+	class DatabaseInstancesController < CloudInstancesController
 		def backup
 	  	instance = CloudInstance.find(params[:database_id])
 			instance.fog.backup()

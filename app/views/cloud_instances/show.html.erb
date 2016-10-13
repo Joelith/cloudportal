@@ -8,6 +8,6 @@
   <header>
     <h1><%= @instance.name %></h1>
   </header>
-  <%= render @instance.show_partial, project: @project, environment: @environment, instance: @instance %>
+  <%= render 'show', project: @project, environment: @environment, instance: @instance %>
 
 </div>

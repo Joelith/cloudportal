@@ -4,7 +4,6 @@ class CloudComponent < ApplicationRecord
 
   serialize :config
 
-  after_initialize :set_default_values
 
   def pretty_name
   	name = 'Undefined component'
@@ -32,8 +31,4 @@ class CloudComponent < ApplicationRecord
   end
 
   private
-
-  def set_default_values
-    self.config ||= {}
-  end
 end

@@ -18,7 +18,7 @@ class: "delete" %></li>
   <h3>Components</h3>
   Create:
   <div class="btn-group" role="group">
-    <%= link_to "Database", new_product_oraclecloud_database_config_path(@product), class: 'btn btn-default' %>
+    <%= link_to "Database", new_product_oraclecloud_database_component_path(@product), class: 'btn btn-default' %>
       <%= link_to "Java", new_product_cloud_component_path(@product), class: 'btn btn-default' %>
      <%= link_to "Compute Instance", new_product_cloud_component_path(@product, :cloud_type=>'compute_instance'), class: 'btn btn-default' %>
 
@@ -31,13 +31,13 @@ class: "delete" %></li>
     </tr>
   </thead>
   <tbody>
-    <% @product.cloud_configs.each do |component| %>
+    <% @product.cloud_components.each do |component| %>
       <tr>
-        <td><%= link_to component.specific.class.name, [@product, component.specific] %></td>
+        <td><%= link_to component.pretty_type, [@product, component] %></td>
         <td>
           <div class="btn-group">
-            <%= link_to "", [:edit, @product, component.specific], class: 'edit' %>
-            <%= link_to "", [@product, component.specific], method: :delete,
+            <%= link_to "", [:edit, @product, component], class: 'edit' %>
+            <%= link_to "", [@product, component], method: :delete,
 data: { confirm: "Are you sure you want to delete this component?"},
 class: "delete" %>
           </div>
