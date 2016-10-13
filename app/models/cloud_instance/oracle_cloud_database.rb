@@ -13,8 +13,26 @@ class OracleCloudDatabase < CloudInstance
 	end
 
 	def status 
-		instance = connection.instances.get(name)
-		instance.status
+		begin
+			@instance ||= connection.instances.get(name)
+			@instance.status
+		rescue Fog::OracleCloud::Database::NotFound
+			"Error"
+		end
+	end
+
+	def fog
+		@instance ||= connection.instances.get(name)
+		@instance
+	end
+
+	def attr_get(attribute)
+		begin
+			@instance ||= connection.instances.get(name)
+			@instance.attributes[attribute.to_sym]
+		rescue Fog::OracleCloud::Database::NotFound
+			"Error"
+		end
 	end
 
 	def month_cost
@@ -41,4 +59,8 @@ class OracleCloudDatabase < CloudInstance
       :oracle_domain => APP_CONFIG[:oracle_domain],
       )
 	end
+
+	def show_partial
+  	"cloud_instances/oraclecloud/database/show"
+  end
 end

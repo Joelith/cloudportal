@@ -1,0 +1,9 @@
+{
+	"type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "properties": {
+    "service_name": { "type": "string" },
+    "edition" : { "type": "string" }
+  },
+  "required": ["service_name", "edition"]
+}

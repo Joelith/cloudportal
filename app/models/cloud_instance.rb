@@ -8,4 +8,5 @@ class CloudInstance < ApplicationRecord
   	cost = 0
   	cost
   end
+
 end

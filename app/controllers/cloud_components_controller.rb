@@ -32,7 +32,8 @@ class CloudComponentsController < ApplicationController
 	    flash[:notice] = "Component has been updated."
 	    redirect_to [@product, @component]
 	  else
-			@attributes = fog_create_attributes(@component.cloud_type)		
+			#@attributes = fog_create_attributes(@component.cloud_type)		
+			@attributes = type_class.create_attributes		
 
 	    flash.now[:alert] = "Component has not been updated."
 	    render "edit"
@@ -60,7 +61,7 @@ class CloudComponentsController < ApplicationController
 	end
 
 	def component_params
-	  params.require(:cloud_component).permit(:type, :config=>type_class.create_attributes)
+	  params.require(:cloud_component).permit(:type, :config=>type_class.create_attributes_allowed)
 	end
 
 	def set_type 

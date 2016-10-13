@@ -20,8 +20,16 @@ class CloudComponent < ApplicationRecord
 	end
 
 	def self.create_attributes
-		{}
+		[]
 	end
+
+  def self.create_attributes_allowed
+    {}
+  end
+
+  def form_partial_to_render
+    "cloud_components_form_fields"
+  end
 
   private
 

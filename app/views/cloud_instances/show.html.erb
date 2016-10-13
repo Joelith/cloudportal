@@ -2,12 +2,12 @@
  <ol class="breadcrumb">
     <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
     <li class="breadcrumb-item"><%= link_to @project.name, @project %></li>
-    <li class="breadcrumb-item"><%= @environment.name%></li>
+    <li class="breadcrumb-item"><%= link_to @environment.name, [@project, @environment] %></li>
     <li class="breadcrumb-item active"><%= @instance.name %></li>
   </ol>
   <header>
     <h1><%= @instance.name %></h1>
   </header>
-  <%= render @instance.form_partial_to_render, f:f, project: @project, environment: @environment, instance: @instance %>
+  <%= render @instance.show_partial, project: @project, environment: @environment, instance: @instance %>
 
 </div>

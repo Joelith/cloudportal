@@ -9,12 +9,21 @@ Rails.application.routes.draw do
 	resources :products do
 		resources :cloud_components
 		resources :oracle_database_components, controller: 'cloud_components', type: 'OracleDatabaseComponent'  
+		namespace :oraclecloud do
+			resources :database_configs
+		end
 	end
 	resources :compute_instances
 	resources :projects do
 		resources :environments do
 			resources :cloud_instances
 			resources :oracle_cloud_database, controller: 'cloud_instances', type: 'OracleCloudDatabase'
+		end
+	end
+
+	namespace :oraclecloud do
+		resources :databases do
+			put :backup
 		end
 	end
 

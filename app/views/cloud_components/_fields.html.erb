@@ -1,7 +1,0 @@
-
-	<% attributes.each do |attribute| %>
-		<%= f.input attribute.to_sym, as: :fake, input_html: {
-				name: "cloud_component[config][#{attribute}]",
-				value: component.config[attribute]
-			} %>
-	<% end %>
