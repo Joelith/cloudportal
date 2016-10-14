@@ -1,18 +1,14 @@
 class CloudInstancesController < ApplicationController
-	before_action :set_project
-	before_action :set_environment
-	before_action :set_instance
+	before_action :set_instance, only: [:show, :destroy]
+	before_action :set_breadcrumb, only: :show
 
 	def show
 	end
 
 	private
-	def set_project
-		@project = Project.find(params[:project_id])
-	end
-
-	def set_environment
-		@environment = Environment.find(params[:environment_id])
+	def set_breadcrumb
+		@environment = @instance.environment
+		@project = @environment.project
 	end
 
 	def set_instance

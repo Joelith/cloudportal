@@ -1,6 +1,7 @@
 <div id="product">
  <ol class="breadcrumb">
     <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Products", products_path %></li>
     <li class="breadcrumb-item active"><%= @product.name%></li>
   </ol>
   <header>
@@ -18,10 +19,7 @@ class: "delete" %></li>
   <h3>Components</h3>
   Create:
   <div class="btn-group" role="group">
-    <%= link_to "Database", new_product_oraclecloud_database_component_path(@product), class: 'btn btn-default' %>
-      <%= link_to "Java", new_product_cloud_component_path(@product), class: 'btn btn-default' %>
-     <%= link_to "Compute Instance", new_product_cloud_component_path(@product, :cloud_type=>'compute_instance'), class: 'btn btn-default' %>
-
+    <%= link_to "Database", new_product_cp_oraclecloud_database_component_path(@product), class: 'btn btn-default' %>
   </div>
   <table class="table table-striped table-hover">
   <thead>

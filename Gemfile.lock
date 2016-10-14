@@ -7,6 +7,12 @@ GIT
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
 
+PATH
+  remote: ../../cp_oraclecloud
+  specs:
+    cp_oraclecloud (0.1.0)
+      rails (~> 5.0.0, >= 5.0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -33,9 +39,6 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    active_record-acts_as (2.0.1)
-      activerecord (>= 4.2)
-      activesupport (>= 4.2)
     activejob (5.0.0.1)
       activesupport (= 5.0.0.1)
       globalid (>= 0.3.6)
@@ -224,12 +227,12 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  active_record-acts_as
   bootstrap-sass (~> 3.3)
   byebug
   capybara (~> 2.4)
   cocoon
   coffee-rails (~> 4.2)
+  cp_oraclecloud!
   devise
   enum_help
   fog-oraclecloud
