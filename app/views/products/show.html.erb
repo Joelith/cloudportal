@@ -19,7 +19,19 @@ class: "delete" %></li>
   <h3>Components</h3>
   Create:
   <div class="btn-group" role="group">
-    <%= link_to "Database", new_product_cp_oraclecloud_database_component_path(@product), class: 'btn btn-default' %>
+    <% @component_types.each do | provider, types| %>
+
+        <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= provider.titleize  %> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <% types.each do | t | %>
+            <li><%= link_to "Create #{t['name']}", [@product, t['class'].constantize, action: :new]%></li>
+          <% end %> 
+         </ul>
+      </div>
+    <% end %>
   </div>
   <table class="table table-striped table-hover">
   <thead>
