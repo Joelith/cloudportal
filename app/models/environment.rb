@@ -51,7 +51,7 @@ class Environment < ApplicationRecord
 				cleaned_config = clean_config(comp.config)
 				instance = cloud_instances.build({
 					:name => cleaned_config[comp.instance_name],
-					:type => "#{comp.provider}#{comp.fog_type}",
+					:type => comp.instance_type,
 					:init_config => cleaned_config
 				})
 				instance.save

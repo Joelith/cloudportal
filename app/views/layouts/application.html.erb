@@ -19,7 +19,7 @@
 	  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		  <div class="container">
 		    <div class="navbar-header">
-		      <%= link_to "Cloud Portal", root_path, class: "navbar-brand" %>
+		      <%= link_to "Cloud Portal", main_app.root_path, class: "navbar-brand" %>
 		      <button type="button" class="navbar-toggle collapsed"
 		        data-toggle="collapse" data-target="#collapse">
 		        <span class="sr-only">Toggle navigation</span>
@@ -32,23 +32,20 @@
 		    <div class="collapse navbar-collapse" id="collapse">
 		      <ul class="nav navbar-nav">
 		        <li class="<%= "active" if current_page?("/") %>">
-		          <%= link_to "Home", root_path %>
+		          <%= link_to "Home", main_app.root_path %>
 		        </li>
 		        <li class="<%= "active" if current_page?("/products") %>">
-		          <%= link_to "Products", products_path %>
-		        </li>
-		        <li class="<%= "active" if current_page?("/compute_instances") %>">
-		        	<%= link_to "Compute", compute_instances_path %>
+		          <%= link_to "Products", main_app.products_path %>
 		        </li>
 		        <li class="<%= "active" if current_page?("/rate_cards")%>">
-		        	<%= link_to "Rate Card", rate_cards_path %>
+		        	<%= link_to "Rate Card", main_app.rate_cards_path %>
 		        </li>
 		        <% unless user_signed_in? %>
 						  <li class="<%= "active" if current_page?("/users/sign_up") %>">
-						    <%= link_to "Sign up", new_user_registration_path %>
+						    <%= link_to "Sign up", main_app.new_user_registration_path %>
 						  </li>
 						  <li class="<%= "active" if current_page?("/users/sign_in") %>">
-						    <%= link_to "Sign in", new_user_session_path %>
+						    <%= link_to "Sign in", main_app.new_user_session_path %>
 						  </li>
 						<% end %>
 		      </ul>
@@ -58,7 +55,7 @@
 					      Signed in as <%= current_user.email %>
 					    </p>
 					    <ul class="nav navbar-nav">
-					      <li><%= link_to "Sign out", destroy_user_session_path,
+					      <li><%= link_to "Sign out", main_app.destroy_user_session_path,
 					        method: :delete %>
 					      </li>
 					    </ul>

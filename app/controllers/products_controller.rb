@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
 	end
 
 	def show
+		@component_types = APP_CONFIG[:plugins]
 	end
 
 	def destroy

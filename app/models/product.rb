@@ -1,4 +1,4 @@
 class Product < ApplicationRecord
-	has_many :cloud_configs
+	has_many :cloud_components
 	
 end

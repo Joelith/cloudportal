@@ -8,7 +8,7 @@
 </ul>
 	<%= f.input :type, as: :hidden, input_html: {name: "cloud_component[type]" } %>
 
-<%= render @component.form_partial_to_render, f:f, product: @product, component: @component, attributes: @attributes %>
+<%= render 'fields', f:f, product: @product, component: @component %>
 
 <br/>
 	<%= f.button :submit, 'Save', class: "btn-primary" %>
