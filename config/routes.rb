@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 	resources :projects do
 		resources :environments do
 			resources :cloud_instances
+			  post :update_position, on: :collection
 			#namespace :oraclecloud do
 			#	resources :database_instances, type: 'Oraclecloud::DatabaseInstance' do
 			#		put :backup

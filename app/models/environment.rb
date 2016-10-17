@@ -52,7 +52,8 @@ class Environment < ApplicationRecord
 				instance = cloud_instances.build({
 					:name => cleaned_config[comp.instance_name],
 					:type => comp.instance_type,
-					:init_config => cleaned_config
+					:init_config => cleaned_config,
+					:status => 'PENDING'
 				})
 				instance.save
 			end 

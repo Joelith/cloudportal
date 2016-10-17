@@ -5,7 +5,7 @@ RSpec.feature "Users can create new products" do
   before do
   #  login_as(user)
   
-		visit "/"
+		visit "/products"
     click_link "New Product"
   end
 
@@ -15,5 +15,7 @@ RSpec.feature "Users can create new products" do
     click_button "Create Product"
 
     expect(page).to have_content "Product has been created."
+    expect(page).to have_content "Bronze Database"
  	end
+
 end

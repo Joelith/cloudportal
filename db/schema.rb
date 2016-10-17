@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013182300) do
+ActiveRecord::Schema.define(version: 20161017015219) do
 
   create_table "cloud_components", force: :cascade do |t|
     t.string   "type"
@@ -18,17 +18,8 @@ ActiveRecord::Schema.define(version: 20161013182300) do
     t.integer  "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "position"
     t.index ["product_id"], name: "index_cloud_components_on_product_id"
-  end
-
-  create_table "cloud_configs", force: :cascade do |t|
-    t.string   "actable_type"
-    t.integer  "actable_id"
-    t.integer  "product_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["actable_type", "actable_id"], name: "index_cloud_configs_on_actable_type_and_actable_id"
-    t.index ["product_id"], name: "index_cloud_configs_on_product_id"
   end
 
   create_table "cloud_instances", force: :cascade do |t|
@@ -38,6 +29,7 @@ ActiveRecord::Schema.define(version: 20161013182300) do
     t.integer  "environment_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "status"
     t.index ["environment_id"], name: "index_cloud_instances_on_environment_id"
   end
 
@@ -53,21 +45,6 @@ ActiveRecord::Schema.define(version: 20161013182300) do
     t.datetime "updated_at",  null: false
     t.index ["product_id"], name: "index_environments_on_product_id"
     t.index ["project_id"], name: "index_environments_on_project_id"
-  end
-
-  create_table "oraclecloud_database_configs", force: :cascade do |t|
-    t.string   "service_name"
-    t.integer  "edition"
-    t.string   "ssh_key"
-    t.integer  "shape"
-    t.string   "version"
-    t.integer  "level"
-    t.integer  "subscription_type"
-    t.string   "description"
-    t.integer  "product_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.index ["product_id"], name: "index_oraclecloud_database_configs_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
