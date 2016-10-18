@@ -1,6 +1,6 @@
 class CloudComponentsController < ApplicationController
-	before_action :set_product
-	before_action :set_component, only: [:show, :edit, :update, :destroy]
+	before_action :set_product, except: :update_position
+	before_action :set_component, only: [:show, :edit, :update, :destroy, :update_position]
 	before_action :set_type
 
 	def new
@@ -14,10 +14,19 @@ class CloudComponentsController < ApplicationController
 	    flash[:notice] = "Component has been added."
 	    redirect_to [@product, @component]
 	  else
+	  	logger.debug @component.errors.inspect
 	    flash.now[:alert] = "Component has not been added."
 	    render "new"
 	  end
 	end
+
+	def update_position
+		@component.insert_at(params[:position].to_i)
+  #  @component.position = params[:position]
+  #  @component.save
+
+    head :ok # this is a POST action, updates sent via AJAX, no view rendered
+  end
 
 	def show
 	end

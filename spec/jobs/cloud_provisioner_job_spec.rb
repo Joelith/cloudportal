@@ -7,9 +7,18 @@ RSpec.describe CloudProvisionerJob, type: :job do
     FactoryGirl.create(:oracle_db, product: product)
     environment = FactoryGirl.create(:environment)
     instances = environment.cloud_instances
+    ids = instances.pluck(:id)
+    expect{ CloudProvisionerJob.perform_now(ids) }.
+        to change { instances.reload.first.status }.from('PENDING').to('PROVISIONED')
+  end
 
-    expect{ CloudProvisionerJob.perform_now(instances) }.
-        to change { instances[0].status }.from('PENDING').to('PROVISIONED')
+  it 'provisions multiple cloud instances' do
+    environment = FactoryGirl.create(:environment_with_db_and_java)
+    instances = environment.cloud_instances
+    ids = instances.pluck(:id)
+    expect{ CloudProvisionerJob.perform_now(ids) }.
+        to change { instances.reload.second.status }.from('PENDING').to('PROVISIONED')
+
   end
 
 end

@@ -22,8 +22,8 @@ jQuery ->
         position = ui.item.index() # this will not work with paginated items, as the index is zero on every page
         $.ajax(
           type: 'POST'
-          url: '/cloud_instances/update_position'
+          url: '/cloud_components/update_position'
           dataType: 'json'
-          data: { cloud_instance: {id: item_id, position: position } }
+          data: {id: item_id, position: position }
         )
     )

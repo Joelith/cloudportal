@@ -49,15 +49,16 @@ class Environment < ApplicationRecord
 
 			if comp.provider && comp.fog_type then
 				cleaned_config = clean_config(comp.config)
-				instance = cloud_instances.build({
+				instance = cloud_instances.create({
 					:name => cleaned_config[comp.instance_name],
 					:type => comp.instance_type,
 					:init_config => cleaned_config,
 					:status => 'PENDING'
 				})
-				instance.save
+			#	instance.save
 			end 
 		end  	
+		CloudProvisionerJob.perform_later(cloud_instances.pluck(:id))
   end
 
   def clean_config(config)
@@ -71,7 +72,7 @@ class Environment < ApplicationRecord
 		]
 		clean_config = {}
   	config.each do |key, value|
-  		clean_config[key] = @replacements.inject(value) { |str, (k,v)| str.gsub(k,v) }
+  		clean_config[key] = @replacements.inject(value) { |str, (k,v)| if str.is_a? String then str.gsub(k,v) end }
   	end
   	clean_config
   end

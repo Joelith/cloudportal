@@ -16,7 +16,6 @@ Rails.application.routes.draw do
 	resources :projects do
 		resources :environments do
 			resources :cloud_instances
-			  post :update_position, on: :collection
 			#namespace :oraclecloud do
 			#	resources :database_instances, type: 'Oraclecloud::DatabaseInstance' do
 			#		put :backup
@@ -24,6 +23,9 @@ Rails.application.routes.draw do
 			#end
 			#resources :oracle_cloud_database, controller: 'cloud_instances', type: 'OracleCloudDatabase'
 		end
+	end
+	resources :cloud_components do
+		post :update_position, on: :collection
 	end
 
 	#namespace :oraclecloud do
