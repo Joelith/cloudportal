@@ -20,17 +20,30 @@ Run the database migrations:
   
 Add the following configuration to config/app_config.yml (assumming we are using the Oracle Cloud plugin. See the individual plugins for more details)
 ```yaml
-development:
+---
+defaults: &defaults
   oracle_username: <username>
   oracle_password: <password>
-  oracle_domain: <identity_domain>
-  oracle_compute_api: <compute_api>
-  oracle_region: <region>
-  oracle_storage_api: <storage_api>
+  oracle_domain: <identity domain>
+  oracle_compute_api: <compute api>
+  oracle_region: <region, remove for us data centre>
+  oracle_storage_api: <storage api>
   plugins: 
     oraclecloud: 
       - name: Database
         class: CpOraclecloud::DatabaseComponent
+      - name: WebLogic
+        class: CpOraclecloud::JavaComponent
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+
 
 ```
 
