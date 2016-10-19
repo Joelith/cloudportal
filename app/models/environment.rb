@@ -1,7 +1,7 @@
 class Environment < ApplicationRecord
   belongs_to :product
   belongs_to :project
-  has_many :cloud_instances
+  has_many :cloud_instances, :dependent => :destroy
 
   validates :name, :presence => true
   validates :start_date, :presence => true
