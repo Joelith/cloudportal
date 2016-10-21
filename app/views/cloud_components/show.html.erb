@@ -9,11 +9,15 @@
   <header>
     <h1><%= @component.pretty_type %></h1>
     <ul class="actions">
-	    <li><%= link_to "Edit Component", [:edit, @product, @component],
+      <% if policy(@component).edit? %>
+        <li><%= link_to "Edit Component", [:edit, @product, @component],
 	      class: "edit" %></li>
-      <li><%= link_to "Delete Component", [@product, @component], method: :delete,
+      <% end %>
+      <% if policy(@component).destroy? %>
+        <li><%= link_to "Delete Component", [@product, @component], method: :delete,
 data: { confirm: "Are you sure you want to delete this component?"},
 class: "delete" %></li>
+      <% end %>
 	  </ul>
   </header>
   <ul class="list-group">

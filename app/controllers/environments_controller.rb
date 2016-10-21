@@ -3,10 +3,12 @@ class EnvironmentsController < ApplicationController
 	before_action :set_environment, only: [:show, :destroy]
 
 	def new
+		authorize Environment
 		@environment = Environment.new()
 	end
 
 	def create
+		authorize Environment
 		@environment = @project.environments.build(environment_params)
 	  if @environment.save
 	    flash[:notice] = "Environment has been requested."
@@ -18,9 +20,11 @@ class EnvironmentsController < ApplicationController
 	end
 
 	def show
+		authorize @environment
 	end
 
 	def destroy
+		authorize @environment
 		@environment.destroy
   	flash[:notice] = "Environment has been deleted."
 

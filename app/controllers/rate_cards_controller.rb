@@ -2,22 +2,26 @@ class RateCardsController < ApplicationController
 	before_action :set_rate_card, only: [:show, :edit, :update, :destroy]
 
 	def index
+		authorize RateCard
 		@rate_cards = RateCard.all
   end
 
  	def new
+ 		authorize RateCard
 		@rate_card = RateCard.new
 	end
 
 	def show
+		authorize @rate_card
 	end
 
 	def create
+		authorize RateCard
 	  @rate_card = RateCard.new(rate_card_params)
 
 	  if @rate_card.save
 	    flash[:notice] = "Rate Card has been created."
-	    redirect_to rate_card_path
+	    redirect_to rate_cards_path
 	  else
   	  flash.now[:alert] = "Rate Card has not been created."
 	    render "new"
@@ -25,9 +29,11 @@ class RateCardsController < ApplicationController
 	end
 
 	def edit
+		authorize @rate_card
 	end
 
 	def update
+		authorize @rate_card
 		if @rate_card.update_attributes(rate_card_params)
 			flash[:notice] = "Rate Card has been updated."
 			redirect_to @rate_card

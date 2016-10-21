@@ -3,6 +3,7 @@ class CloudInstancesController < ApplicationController
 	before_action :set_breadcrumb, only: :show
 
 	def show
+		authorize @instance
 	end
 
 	private

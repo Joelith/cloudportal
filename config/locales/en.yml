@@ -20,4 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+ pundit:
+   default: 'You cannot perform this action.'
+   product_policy:
+     new?: 'You do not have permission to create a product'
+     create?: 'You do not have permission to create a product'

@@ -7,32 +7,38 @@
   <header>
     <h1><%= @product.name %></h1>
     <ul class="actions">
-	    <li><%= link_to "Edit Product", [:edit, @product],
+      <% if policy(@product).edit? %>
+        <li><%= link_to "Edit Product", [:edit, @product],
 	      class: "edit" %></li>
-      <li><%= link_to "Delete Product", @product, method: :delete,
+      <% end %>
+      <% if policy(@product).destroy? %>
+        <li><%= link_to "Delete Product", @product, method: :delete,
 data: { confirm: "Are you sure you want to delete this product?"},
 class: "delete" %></li>
+      <% end %>
 	  </ul>
   </header>
 
   <%= simple_format(@product.description) %>
   <h3>Components</h3>
-  Create:
-  <div class="btn-group" role="group">
-    <% @component_types.each do | provider, types| %>
+  <% if policy(CloudComponent).new? %>
+    Create:
+    <div class="btn-group" role="group">
+      <% @component_types.each do | provider, types| %>
 
-        <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= provider.titleize  %> <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <% types.each do | t | %>
-            <li><%= link_to "Create #{t['name']}", [@product, t['class'].constantize, action: :new]%></li>
-          <% end %> 
-         </ul>
-      </div>
-    <% end %>
-  </div>
+          <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= provider.titleize  %> <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <% types.each do | t | %>
+              <li><%= link_to "Create #{t['name']}", [@product, t['class'].constantize, action: :new]%></li>
+            <% end %> 
+           </ul>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
   <table class="table table-striped table-hover" id="sortable">
   <thead>
     <tr>
@@ -46,10 +52,14 @@ class: "delete" %></li>
         <td><%= link_to component.pretty_type, [@product, component] %></td>
         <td>
           <div class="btn-group">
-            <%= link_to "", [:edit, @product, component], class: 'edit' %>
-            <%= link_to "", [@product, component], method: :delete,
+            <% if policy(component).edit? %>
+              <%= link_to "", [:edit, @product, component], class: 'edit' %>
+            <% end %>
+            <% if policy(component).destroy? %>
+              <%= link_to "", [@product, component], method: :delete,
 data: { confirm: "Are you sure you want to delete this component?"},
 class: "delete" %>
+            <% end %>
           </div>
         </td>     
       </tr>

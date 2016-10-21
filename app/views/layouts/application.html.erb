@@ -35,11 +35,13 @@
 		          <%= link_to "Home", main_app.root_path %>
 		        </li>
 		        <li class="<%= "active" if current_page?("/products") %>">
-		          <%= link_to "Products", main_app.products_path %>
+		          <%= link_to "Products", products_path %>
 		        </li>
-		        <li class="<%= "active" if current_page?("/rate_cards")%>">
-		        	<%= link_to "Rate Card", main_app.rate_cards_path %>
-		        </li>
+		        <% if policy(RateCard).index? %>
+		        	<li class="<%= "active" if current_page?("/rate_cards")%>">
+		        		<%= link_to "Rate Card", rate_cards_path %>
+		        	</li>
+		        <% end %>
 		        <% unless user_signed_in? %>
 						  <li class="<%= "active" if current_page?("/users/sign_up") %>">
 						    <%= link_to "Sign up", main_app.new_user_registration_path %>

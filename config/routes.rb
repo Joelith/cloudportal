@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   get 'environments/index'
 
   devise_for :users
-	root "projects#index"
-
+  authenticated :user do
+	  root "projects#index", as: :authenticated_root
+	end
+	root to: redirect('/users/sign_in')
+	
 	resources :products do
 		resources :cloud_components
 		#namespace :oraclecloud do

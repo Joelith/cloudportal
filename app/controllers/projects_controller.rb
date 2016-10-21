@@ -2,17 +2,21 @@ class ProjectsController < ApplicationController
 	before_action :set_project, only: [:show, :edit, :update, :destroy]
 
 	def index
+		authorize Project
 		@projects = Project.all
   end
 
  	def new
+		authorize Project
 		@project = Project.new
 	end
 
 	def show
+		authorize @project
 	end
 
 	def create
+		authorize Project
 	  @project = Project.new(project_params)
 
 	  if @project.save
@@ -25,9 +29,11 @@ class ProjectsController < ApplicationController
 	end
 
 	def edit
+		authorize @project
 	end
 
 	def destroy
+		authorize @project
 		@project.destroy
   	flash[:notice] = "Project has been deleted."
 
@@ -35,6 +41,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def update
+		authorize @project
 		if @project.update_attributes(project_params)
 			flash[:notice] = "Project has been updated."
 			redirect_to @project

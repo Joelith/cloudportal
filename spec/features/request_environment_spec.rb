@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.feature "Users can create environment" do
-  #let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:project_owner) }
   before do
-  #  login_as(user)
+    login_as(user)
     project = FactoryGirl.create(:project, name: "Echelon", budget: 10000)
     product = FactoryGirl.create(:product, name: 'Bronze Database')
     FactoryGirl.create(:oracle_db, product: product)

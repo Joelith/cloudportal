@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.feature "Users can create new products" do
-  #let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:admin) }
   before do
-  #  login_as(user)
+    login_as(user)
   
 		visit "/products"
     click_link "New Product"

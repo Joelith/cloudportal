@@ -2,15 +2,17 @@ class ProductsController < ApplicationController
 	before_action :set_product, only: [:show, :edit, :update, :destroy]
 
 	def index
+		authorize Product
 		@products = policy_scope(Product)
 	end
 
 	def new
+	  authorize Product
 		@product = Product.new
-		#@product.cloud_components.build
 	end
 
 	def create
+		authorize Product
 	  @product = Product.new(product_params)
 
 	  if @product.save
@@ -23,13 +25,16 @@ class ProductsController < ApplicationController
 	end
 
 	def edit
+		authorize @product
 	end
 
 	def show
+		authorize @product
 		@component_types = APP_CONFIG[:plugins]
 	end
 
 	def destroy
+		authorize @product
 		@product.destroy
   	flash[:notice] = "Product has been deleted."
 
@@ -37,6 +42,7 @@ class ProductsController < ApplicationController
 	end
 
 	def update
+		authorize @product
 		if @product.update_attributes(product_params)
 			flash[:notice] = "Product has been updated."
 			redirect_to @product

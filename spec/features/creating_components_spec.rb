@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.feature "Users can create new components in product" do
-  #let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:admin) }
   before do
-  #  login_as(user)
+    login_as(user)
     product = FactoryGirl.create(:product, name: 'Bronze Database')
 
 		visit product_path(product)

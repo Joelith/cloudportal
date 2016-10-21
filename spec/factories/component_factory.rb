@@ -18,6 +18,7 @@ FactoryGirl.define do
   	shape "oc3"
   	version "12.1"
   	ssh_key "ssh-rsa sfsdf"
+  	admin_username "weblogic"
   	admin_password "Welcome1$"
 	end
 end

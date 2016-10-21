@@ -4,10 +4,12 @@ class CloudComponentsController < ApplicationController
 	before_action :set_type
 
 	def new
+		authorize CloudComponent
 		@component = type_class.new()
 	end
 
 	def create
+		authorize CloudComponent
 		@component = type_class.new(component_params)
 		@component.product = @product
 	  if @component.save
@@ -29,12 +31,15 @@ class CloudComponentsController < ApplicationController
   end
 
 	def show
+		authorize @component
 	end
 
 	def edit
+		authorize @component
 	end
 
 	def update
+		authorize @component
 		if @component.update(component_params)
 	    flash[:notice] = "Component has been updated."
 	    redirect_to [@product, @component]
@@ -45,6 +50,7 @@ class CloudComponentsController < ApplicationController
 	end
 
 	def destroy
+		authorize @component
 		@component.destroy
   	flash[:notice] = "Component has been deleted."
 
