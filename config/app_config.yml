@@ -1,0 +1,23 @@
+---
+defaults: &defaults
+  oracle_username: "cloud.admin"
+  oracle_password: "slacK@5FoLDing"
+  oracle_domain: "gse00000535"
+  oracle_compute_api: "https://api-z11.compute.em2.oraclecloud.com/"
+  oracle_region: "emea"
+  oracle_storage_api: "https://gse00000535.storage.oraclecloud.com/v1/Storage-gse00000535"
+  plugins: 
+    oraclecloud: 
+      - name: Database
+        class: CpOraclecloud::DatabaseComponent
+      - name: WebLogic
+        class: CpOraclecloud::JavaComponent
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
