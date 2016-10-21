@@ -8,7 +8,7 @@ This is a work in progress and still has large capability gaps (in particular se
 
 Download this git file and install somewhere. (You will need Rails 5 already installed). 
 
-You will need to install a plugin for one of the clouds. Only the Oracle Cloud Platform is supported at the moment. The current code already includes this in the gemfile, so it's already installed. (It will be removed at some point). 
+You will need to install a plugin for one of the clouds. Only the Oracle Cloud Platform is supported at the moment. The current code already includes this in the gemfile, so it's already installed.  
 
 Run bundle to install everything
 
@@ -17,6 +17,10 @@ Run bundle to install everything
 Run the database migrations:
 
   $ rails db:migrate
+  
+The application has authentication through Pundit and Devise already configured. There are some default users confitured in seeds.db. Run the following to add them in:
+
+  $ rails db:seed
   
 Add the following configuration to config/app_config.yml (assumming we are using the Oracle Cloud plugin. See the individual plugins for more details)
 ```yaml
@@ -48,3 +52,14 @@ production:
 ```
 
 The 'plugins' section defines which Cloud Providers you support and what components from them you are using. 
+
+## Usage
+Start the server with 
+
+  $ rails server
+  
+You will need to log in to be able to interact with the system. There are 2 pre-defined users:
+
+- admin@example.com/welcome1: This user can do everything, but importantly can create and edit product definitions
+- jcooper@example.com/welcome1: This user can create projects and request environments, but can't edit product definitions
+
