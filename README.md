@@ -22,16 +22,10 @@ The application has authentication through Pundit and Devise already configured.
 
   $ rails db:seed
   
-Add the following configuration to config/app_config.yml (assumming we are using the Oracle Cloud plugin. See the individual plugins for more details)
+You need to advise the application on which plugins you are using. To do so, add the following configuration to config/app_config.yml (assumming we are using the Oracle Cloud plugin. See the individual plugins for more details). 
 ```yaml
 ---
 defaults: &defaults
-  oracle_username: <username>
-  oracle_password: <password>
-  oracle_domain: <identity domain>
-  oracle_compute_api: <compute api>
-  oracle_region: <region, remove for us data centre>
-  oracle_storage_api: <storage api>
   plugins: 
     oraclecloud: 
       - name: Database
@@ -51,7 +45,7 @@ production:
 
 ```
 
-The 'plugins' section defines which Cloud Providers you support and what components from them you are using. 
+The 'plugins' section defines which Cloud Providers you support and what components from them you are using. Plugin specific configuration (including usernames, urls etc) needs to be added to each plugin. See the plugin for more details
 
 ## Usage
 Start the server with 
@@ -63,3 +57,6 @@ You will need to log in to be able to interact with the system. There are 2 pre-
 - admin@example.com/welcome1: This user can do everything, but importantly can create and edit product definitions
 - jcooper@example.com/welcome1: This user can create projects and request environments, but can't edit product definitions
 
+## Plugins
+The currently supported plugins are:
+- [Oracle Cloud Platform](http://github.com/Joelith/cp_oraclecloud)
