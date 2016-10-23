@@ -45,7 +45,18 @@ production:
 
 ```
 
-The 'plugins' section defines which Cloud Providers you support and what components from them you are using. Plugin specific configuration (including usernames, urls etc) needs to be added to each plugin. See the plugin for more details
+The 'plugins' section defines which Cloud Providers you support and what components from them you are using. Plugin specific configuration (including usernames, urls etc) needs to be added to an initializer per plugin. See each plugin for more details. As an example the initializer (in config/initializers/cp_oraclecloud.rb) for the Oracle Cloud Platform would look like:
+
+```ruby
+CpOraclecloud.setup do |config|
+  config.username = <username>
+  config.password = <password>
+  config.domain = <domain>
+  config.region = <region, remove if using US data centres>
+  config.compute_api = <compute url>
+  config.storage_api = <storage url>
+end
+```
 
 ## Usage
 Start the server with 
