@@ -27,7 +27,7 @@ You need to advise the application on which plugins you are using. To do so, add
 ---
 defaults: &defaults
   plugins: 
-    - oraclecloud: 
+    - cp_oraclecloud: 
 
 development:
   <<: *defaults
