@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
 
 	def show
 		authorize @product
-		@component_types = APP_CONFIG[:plugins]
+		@plugins = APP_CONFIG[:plugins]
 	end
 
 	def destroy

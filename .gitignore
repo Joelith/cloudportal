@@ -22,3 +22,4 @@
 
 # Ignore cloud credentials
 config/app_config.yml
+config/initializers/cp_oraclecloud.rb
