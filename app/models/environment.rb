@@ -46,17 +46,13 @@ class Environment < ApplicationRecord
 		# Grab the components to build from the product
 		# and then attach them to here
 		product.cloud_components.each do |comp|
-
-			if comp.provider && comp.fog_type then
-				cleaned_config = clean_config(comp.config)
-				instance = cloud_instances.create({
-					:name => cleaned_config[comp.instance_name],
-					:type => comp.instance_type,
-					:init_config => cleaned_config,
-					:status => 'PENDING'
-				})
-			#	instance.save
-			end 
+			cleaned_config = clean_config(comp.config)
+			instance = cloud_instances.create({
+				:name => cleaned_config[comp.instance_name],
+				:type => comp.instance_type,
+				:init_config => cleaned_config,
+				:status => 'PENDING'
+			})
 		end  	
 		CloudProvisionerJob.perform_later(cloud_instances.pluck(:id))
   end

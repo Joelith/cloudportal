@@ -21,7 +21,7 @@ RSpec.feature "Users can create environment" do
     click_button "Create Environment"
 
     expect(page).to have_content "Environment has been requested."
-    expect(page).to have_content "Eche_Dev_DB"
+    expect(page).to have_content "Eche-Dev-DB"
     expect(page).to have_content "PENDING"
 
  	end
