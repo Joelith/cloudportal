@@ -27,11 +27,7 @@ You need to advise the application on which plugins you are using. To do so, add
 ---
 defaults: &defaults
   plugins: 
-    oraclecloud: 
-      - name: Database
-        class: CpOraclecloud::DatabaseComponent
-      - name: WebLogic
-        class: CpOraclecloud::JavaComponent
+    - cp_oraclecloud: 
 
 development:
   <<: *defaults
@@ -45,7 +41,7 @@ production:
 
 ```
 
-The 'plugins' section defines which Cloud Providers you support and what components from them you are using. Plugin specific configuration (including usernames, urls etc) needs to be added to an initializer per plugin. See each plugin for more details. As an example the initializer (in config/initializers/cp_oraclecloud.rb) for the Oracle Cloud Platform would look like:
+The 'plugins' section defines which Cloud Providers you support. Plugin specific configuration (including usernames, urls etc) needs to be added to an initializer per plugin. See each plugin for more details. As an example the initializer (in config/initializers/cp_oraclecloud.rb) for the Oracle Cloud Platform would look like:
 
 ```ruby
 CpOraclecloud.setup do |config|
@@ -55,6 +51,7 @@ CpOraclecloud.setup do |config|
   config.region = <region, remove if using US data centres>
   config.compute_api = <compute url>
   config.storage_api = <storage url>
+  config.active_components = ['Database', 'Java']
 end
 ```
 
