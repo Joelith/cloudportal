@@ -9,6 +9,13 @@ class CloudInstance < ApplicationRecord
   	cost
   end
 
+  def init_config=(value)
+    if value.is_a? String
+      value = JSON.parse(value.gsub("'",'"').gsub('=>',':'))
+    end
+    super(value)
+  end
+
 	#def self.instance_classes
   #  if subclasses.empty?
   #    Dir["#{Rails.root}/app/pages/*_page.rb"].each do |file|

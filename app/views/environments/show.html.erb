@@ -33,7 +33,13 @@ class: "delete" %></li>
   <tbody>
     <% @environment.cloud_instances.each do |instance| %>
       <tr>
-        <td><%= link_to instance.name, instance %></td>
+        <td>
+          <% if instance.status == 'PROVISIONED' %>
+            <%= link_to instance.name, instance %>
+          <% else %>
+            <%= instance.name %>
+          <% end %>
+        </td>
         <td><%= instance.provider %></td>
         <td><%= instance.cloud_type %></td>
         <td><%= instance.status %></td>

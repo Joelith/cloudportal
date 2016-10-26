@@ -17,7 +17,7 @@ class CloudProvisionerJob < ApplicationJob
   		  instance.update(status: 'PROVISIONED')
   		rescue ArgumentError => exception
         logger.fatal "Validation error in Job: #{exception.inspect}"
-        instance.update(status: 'VALIDATION_ERROR')
+        instance.update(status: 'VALIDATION_ERROR', error_description: exception)
         previous_error = true
       end
       logger.debug "Instance updated"
@@ -28,7 +28,7 @@ class CloudProvisionerJob < ApplicationJob
   	logger.fatal "Exception in Job: #{exception.inspect}"
     logger.error $!.backtrace
     CloudInstance.find(self.arguments[0]).each do |instance|
-      instance.update(status: 'ERROR')
+      instance.update(status: 'ERROR', error_description: exception)
     end
   end
 end

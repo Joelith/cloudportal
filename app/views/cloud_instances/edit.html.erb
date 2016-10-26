@@ -1,0 +1,11 @@
+<header>
+  <h1>
+    Update Instance
+  </h1>
+</header>
+<p>Modify the configuration directly and then go back to the errors page to reprovision this environment</p>
+<%= simple_form_for(@instance.becomes(CloudInstance)) do |f| %>
+	<%= f.input :init_config, :input_html => {:rows => 10} %>
+	<%= f.button :submit, 'Save', class: "btn-primary" %>
+<% end %>
+

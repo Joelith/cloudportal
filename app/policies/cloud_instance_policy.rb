@@ -9,15 +9,19 @@ class CloudInstancePolicy < ApplicationPolicy
   end
 
   def edit?
-		true
+		user.has_role? :admin
 	end
 
 	def update?
-		true
+		user.has_role? :admin
 	end
 
 	def destroy?
 		true
+	end
+
+	def errors?
+		user.has_role? :admin
 	end
 
   class Scope < Scope

@@ -1,5 +1,5 @@
 class EnvironmentsController < ApplicationController
-	before_action :set_project
+	before_action :set_project, except: [:reprovision]
 	before_action :set_environment, only: [:show, :destroy]
 
 	def new
@@ -29,6 +29,14 @@ class EnvironmentsController < ApplicationController
   	flash[:notice] = "Environment has been deleted."
 
   	redirect_to @project
+	end
+
+	def reprovision
+		instances = CloudInstance.select { |i| i.status != 'PROVISIONED' }
+		instances.each { |i| i.update(:status=>'PENDING') }
+		CloudProvisionerJob.perform_later(instances.pluck(:id))
+		flash[:notice] = "Reprovisioning job has been requested"
+		redirect_to errors_cloud_instances_path
 	end
 
 	private

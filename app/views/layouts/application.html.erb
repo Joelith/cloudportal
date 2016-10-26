@@ -42,6 +42,11 @@
 		        		<%= link_to "Rate Card", rate_cards_path %>
 		        	</li>
 		        <% end %>
+		        <% if policy(CloudInstance).errors? %>
+		        	<li class="<%= "active" if current_page?("/cloud_instances/errors")%>">
+		        		<%= link_to "Provisioning Errors", errors_cloud_instances_path %>
+		        	</li>	
+		        <% end %>
 		        <% unless user_signed_in? %>
 						  <li class="<%= "active" if current_page?("/users/sign_up") %>">
 						    <%= link_to "Sign up", main_app.new_user_registration_path %>

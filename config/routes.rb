@@ -16,6 +16,15 @@ Rails.application.routes.draw do
 		#end
 	end
 
+	resources :cloud_instances do
+		collection do
+			get 'errors'
+		end
+		#member do
+		#	get :reprovision
+		#end
+	end
+
 	resources :projects do
 		resources :environments do
 			resources :cloud_instances
@@ -27,6 +36,13 @@ Rails.application.routes.draw do
 			#resources :oracle_cloud_database, controller: 'cloud_instances', type: 'OracleCloudDatabase'
 		end
 	end
+
+	resources :environments do
+		member do
+			put 'reprovision'
+		end
+	end
+	
 	resources :cloud_components do
 		post :update_position, on: :collection
 	end
