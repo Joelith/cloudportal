@@ -52,6 +52,7 @@ CpOraclecloud.setup do |config|
   config.compute_api = <compute url>
   config.storage_api = <storage url>
   config.active_components = ['Database', 'Java']
+  config.rate_card = YAML.load_file(File.expand_path "<path to rate card yml file", __FILE__)[Rails.env].symbolize_keys!
 end
 ```
 
