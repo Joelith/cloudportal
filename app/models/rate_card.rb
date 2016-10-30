@@ -1,2 +1,0 @@
-class RateCard < ApplicationRecord
-end

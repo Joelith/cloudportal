@@ -37,16 +37,17 @@
 		        <li class="<%= "active" if current_page?("/products") %>">
 		          <%= link_to "Products", products_path %>
 		        </li>
-		        <% if policy(RateCard).index? %>
-		        	<li class="<%= "active" if current_page?("/rate_cards")%>">
-		        		<%= link_to "Rate Card", rate_cards_path %>
-		        	</li>
-		        <% end %>
-		        <% if policy(CloudInstance).errors? %>
-		        	<li class="<%= "active" if current_page?("/cloud_instances/errors")%>">
-		        		<%= link_to "Provisioning Errors", errors_cloud_instances_path %>
-		        	</li>	
-		        <% end %>
+		        
+						<li class="dropdown">
+          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+          		<ul class="dropdown-menu">		        
+          			<% if policy(CloudInstance).errors? %>
+		        			<li class="<%= "active" if current_page?("/cloud_instances/errors")%>">
+		        				<%= link_to "Provisioning Errors", errors_cloud_instances_path %>
+		        			</li>	
+		        		<% end %>
+		        	</ul>
+		        </li>
 		        <% unless user_signed_in? %>
 						  <li class="<%= "active" if current_page?("/users/sign_up") %>">
 						    <%= link_to "Sign up", main_app.new_user_registration_path %>

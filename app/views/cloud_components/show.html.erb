@@ -21,12 +21,13 @@ class: "delete" %></li>
 	  </ul>
   </header>
   <ul class="list-group">
-  <% @component.config.each do |key, value| %>
-    <li class="list-group-item"><strong>
-      <%= key %>
-    </strong>
-      <%= value %>
-    </li>
-  <% end %>
+    <li class="list-group-item"><strong>Est. Monthly Cost</strong> <%= number_to_currency(@component.calculate_monthly_cost(@component.config)) %></li>
+    <% @component.config.each do |key, value| %>
+      <li class="list-group-item"><strong>
+        <%= key %>
+      </strong>
+        <%= value %>
+      </li>
+    <% end %>
   </ul>
 </div>

@@ -37,6 +37,7 @@ class: "delete" %></li>
   <thead>
     <tr>
       <th>Type</th>
+      <th>Est. Monthly Cost</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -44,6 +45,7 @@ class: "delete" %></li>
     <% @product.cloud_components.each do |component| %>
       <tr data-item-id=<%= "#{component.id}" %> class="item">
         <td><%= link_to component.pretty_type, [@product, component] %></td>
+        <td><%= number_to_currency(component.calculate_monthly_cost(component.config)) %></td>
         <td>
           <div class="btn-group">
             <% if policy(component).edit? %>
