@@ -36,7 +36,6 @@ gem "devise"
 gem "pundit", "~> 0.3.0"
 gem "cocoon"
 gem "enum_help"
-gem "cp_oraclecloud", path: '../cp_oraclecloud'
 gem "acts_as_list"
 gem "jquery-ui-rails"
 gem "rolify"
@@ -44,7 +43,8 @@ gem 'chartjs-ror'
 gem 'dragonfly'
 gem 'whenever', :require => false
 
-gem "cp_aws", path: '../cp_aws'
+gem "cp_aws"
+gem "cp_oraclecloud"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
