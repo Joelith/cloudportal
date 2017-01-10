@@ -9,33 +9,28 @@ Rails.application.routes.draw do
 	end
 	root to: redirect('/users/sign_in')
 	
+	resources :users
+
 	resources :products do
 		resources :cloud_components
-		#namespace :oraclecloud do
-		#	resources :database_components, type: 'Oraclecloud::DatabaseComponent'
-		#end
 	end
 
 	resources :cloud_instances do
 		collection do
 			get 'errors'
 		end
-		#member do
-		#	get :reprovision
-		#end
 	end
 
 	resources :projects do
+		get :select_team
 		resources :environments do
 			resources :cloud_instances
-			#namespace :oraclecloud do
-			#	resources :database_instances, type: 'Oraclecloud::DatabaseInstance' do
-			#		put :backup
-			#	end
-			#end
-			#resources :oracle_cloud_database, controller: 'cloud_instances', type: 'OracleCloudDatabase'
+			get :renew
 		end
 	end
+
+	#get "projects/select_team" => 'projects#select_team', :as => :select_team
+
 
 	resources :environments do
 		member do
@@ -46,18 +41,6 @@ Rails.application.routes.draw do
 	resources :cloud_components do
 		post :update_position, on: :collection
 	end
-
-	#namespace :oraclecloud do
-	#	resources :database_instances, type: 'Oraclecloud::DatabaseInstance' do
-	#		put :backup
-	#	end
-	#end
-
-	#namespace :oraclecloud do
-	#	resources :databases do
-	#		put :backup
-	#	end
-	#end
 
 	resources :rate_cards
 

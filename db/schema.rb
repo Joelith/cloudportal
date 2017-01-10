@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025212836) do
+ActiveRecord::Schema.define(version: 20170110024129) do
 
   create_table "cloud_components", force: :cascade do |t|
     t.string   "type"
@@ -42,8 +42,9 @@ ActiveRecord::Schema.define(version: 20161025212836) do
     t.text     "description"
     t.integer  "product_id"
     t.integer  "project_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.text     "justification"
     t.index ["product_id"], name: "index_environments_on_product_id"
     t.index ["project_id"], name: "index_environments_on_project_id"
   end
@@ -53,21 +54,20 @@ ActiveRecord::Schema.define(version: 20161025212836) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "icon_uid"
   end
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.float    "budget"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
   end
 
-  create_table "rate_cards", force: :cascade do |t|
-    t.string   "provider"
-    t.string   "key"
-    t.float    "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "projects_users", id: false, force: :cascade do |t|
+    t.integer "user_id",    null: false
+    t.integer "project_id", null: false
   end
 
   create_table "roles", force: :cascade do |t|

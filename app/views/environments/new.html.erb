@@ -1,7 +1,19 @@
-<header>
-  <h1>
-    Request Environment
-  </h1>
-</header>
-
-<%= render "form", project: @project, environment: @environment%>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+  <li class="breadcrumb-item"><%= link_to "Projects", projects_path %></li>
+  <li class="breadcrumb-item"><%= link_to @project.name, @project %></li>
+  <li class="breadcrumb-item active">Request Environment</li>
+</ol>
+<div class="card">
+	<div class="card-header">
+    <i class="fa fa-edit"></i>Request Environment
+    <div class="card-actions">
+		  <%= link_to @project do %>
+      	<i class="fa fa-close"></i>
+      <% end %>
+    </div>
+  </div>   	
+  <div class="card-block">
+		<%= render "form", project: @project, environment: @environment%>
+	</div>
+</div>

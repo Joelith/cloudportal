@@ -9,6 +9,7 @@ RSpec.feature "Users can view an instance" do
   before do
     FactoryGirl.create(:product_with_db, name: 'Platinum Database')
     login_as(user)
+    project.users << user
     visit project_path(project)
     click_link "Request Environment"
     fill_in "Name", with: "Dev"
@@ -17,14 +18,14 @@ RSpec.feature "Users can view an instance" do
     select "Platinum Database", :from=>"environment[product_id]"  
   end
 
-  scenario "see status and backup" do
+  scenario "and see status and backup" do
     expect { click_button "Create Environment" }.to change { enqueued_jobs.size }.by(1)
     perform_enqueued_jobs { CloudProvisionerJob.perform_now(*enqueued_jobs.first[:args]) }
     visit project_environment_path(project, project.environments.first)
 
     expect(page).to have_content "PROVISIONED"
     click_link "#{project.environments.first.cloud_instances.first.name}"
-    expect(page).to have_content "Status Running"
+    expect(page).to have_content "Running"
     click_link "Backup"
     expect(page).to have_content "Backup has been requested"
     y = Time.now.strftime('%Y')

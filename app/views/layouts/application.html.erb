@@ -15,70 +15,69 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-	  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		  <div class="container">
-		    <div class="navbar-header">
-		      <%= link_to "Cloud Portal", main_app.root_path, class: "navbar-brand" %>
-		      <button type="button" class="navbar-toggle collapsed"
-		        data-toggle="collapse" data-target="#collapse">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		    </div>
-
-		    <div class="collapse navbar-collapse" id="collapse">
-		      <ul class="nav navbar-nav">
-		        <li class="<%= "active" if current_page?("/") %>">
-		          <%= link_to "Home", main_app.root_path %>
-		        </li>
-		        <li class="<%= "active" if current_page?("/products") %>">
-		          <%= link_to "Products", products_path %>
-		        </li>
-		        
-						<li class="dropdown">
-          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
-          		<ul class="dropdown-menu">		        
-          			<% if policy(CloudInstance).errors? %>
-		        			<li class="<%= "active" if current_page?("/cloud_instances/errors")%>">
-		        				<%= link_to "Provisioning Errors", errors_cloud_instances_path %>
-		        			</li>	
+  <body class="navbar-fixed fixed-nav fixed-nav">
+  	<header class="navbar">
+  		<div class="container-fluid">
+  			<a class="navbar-brand" href="#">Cloud Portal</a>
+  			<ul class="nav navbar-nav hidden-md-down">
+          <!--<li class="nav-item">
+              <a class="nav-link navbar-toggler layout-toggler" href="#">☰</a>
+          </li>-->
+          <li class="nav-item p-x-1">
+             	<%= link_to "Home", main_app.root_path, :class=>'nav-link' %>
+          </li>
+          <li class="nav-item p-x-1">
+		          <%= link_to "Products", products_path, :class=>'nav-link' %>
+          </li>
+          <% if current_user.has_role? :admin %>
+	          <li class="nav-item p-x-1 dropdown">
+	        		<a href="#" class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+	        		<div class="dropdown-menu">	
+	        			<% if policy(User).index? %>
+		        				<%= link_to "Users", users_path, :class=>'dropdown-item' %>
+		        		<% end %>	        
+	        			<% if policy(CloudInstance).errors? %>
+		        				<%= link_to "Provisioning Errors", errors_cloud_instances_path, :class=>'dropdown-item' %>
 		        		<% end %>
-		        	</ul>
+		        		<div class="dropdown-header text-xs-center">
+	                <strong>Plugins</strong>
+	              </div>
+	               <% APP_CONFIG[:plugins].each do | plugin | %>
+                    <%= link_to plugin.camelize.constantize, polymorphic_path([plugin, :admin]), :class=>'dropdown-item' %>
+                  <% end %>
+		        	</div>
 		        </li>
-		        <% unless user_signed_in? %>
-						  <li class="<%= "active" if current_page?("/users/sign_up") %>">
-						    <%= link_to "Sign up", main_app.new_user_registration_path %>
-						  </li>
-						  <li class="<%= "active" if current_page?("/users/sign_in") %>">
-						    <%= link_to "Sign in", main_app.new_user_session_path %>
-						  </li>
-						<% end %>
-		      </ul>
-		      <% if user_signed_in? %>
-					  <div class="navbar-right">
-					    <p class="navbar-text">
-					      Signed in as <%= current_user.email %>
-					    </p>
-					    <ul class="nav navbar-nav">
-					      <li><%= link_to "Sign out", main_app.destroy_user_session_path,
-					        method: :delete %>
-					      </li>
-					    </ul>
-					  </div>
-					<% end %>
-		    </div>
-		  </div>
-		</nav>
-  	<div class="container">
-		  <% flash.each do |key, message| %>
-			  <div class="alert alert-<%= key %>">
-			    <%= message %>
-			  </div>
-			<% end %>
-	    <%= yield %>
+		      <% end %>
+	      </ul>
+	      <ul class="nav navbar-nav pull-right hidden-md-down p-x-1">
+	      	<li class="nav-item dropdown">
+	      	  <a href="#" class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %> <span class="caret"></span></a>
+	      	  <div class="dropdown-menu dropdown-menu-right">
+	      	  	<%= link_to "Sign out", main_app.destroy_user_session_path,
+					        method: :delete, :class=>'dropdown-item' %>
+	      	  </div>
+	      	</li>
+      	</ul>
+  		</div>
+  	</header>
+	  
+  	<main class="main">
+  		<!--<ol class="breadcrumb">
+  			<li class="breadcrumb-item"><%= link_to "Home", main_app.root_path %></li>
+  		</ol>-->
+  		<div class="container-fluid">
+			  <% flash.each do |key, message| %>
+				  <div class="alert alert-<%= key %>">
+				    <%= message %>
+				  </div>
+				<% end %>
+				<%= yield %>
+			</div>
     </div>
+    <footer class="footer">
+        <span class="text-left">
+            Source code available here: <a href="https://github.com/Joelith/cloudportal">Cloud Portal</a>
+        </span>
+    </footer>
   </body>
 </html>

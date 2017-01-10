@@ -1,11 +1,22 @@
-<header>
-  <h1>
-    Update Instance
-  </h1>
-</header>
-<p>Modify the configuration directly and then go back to the errors page to reprovision this environment</p>
-<%= simple_form_for(@instance.becomes(CloudInstance)) do |f| %>
-	<%= f.input :init_config, :input_html => {:rows => 10} %>
-	<%= f.button :submit, 'Save', class: "btn-primary" %>
-<% end %>
-
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+  <li class="breadcrumb-item"><%= link_to "Provisioning Errors", errors_cloud_instances_path %></li>
+  <li class="breadcrumb-item active">Update</li>
+</ol>
+<div class="card">
+	<div class="card-header">
+    <i class="fa fa-edit"></i>Update Instance
+    <div class="card-actions">
+		  <%= link_to errors_cloud_instances_path do %>
+      	<i class="fa fa-close"></i>
+      <% end %>
+    </div>
+  </div>   	
+  <div class="card-block">
+  	<p>Modify the configuration directly and then go back to the errors page to reprovision this environment</p>
+  	<%= simple_form_for(@instance.becomes(CloudInstance)) do |f| %>
+			<%= f.input :init_config, :input_html => {:rows => 10} %>
+			<%= f.button :submit, 'Save', class: "btn-primary" %>
+		<% end %>
+  </div>
+</div>

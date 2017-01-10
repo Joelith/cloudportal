@@ -1,30 +1,47 @@
-<table class="table table-striped table-hover">
-<thead>
-    <tr>
-      <th>Instance</th>
-      <th>Date</th>
-      <th>Product</th>
-      <th>Status</th>
-      <th>Error</th>
-      <th>&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @instances.each do |environment, instances| %>
-      <tr>
-        <td colspan="5"><%= link_to environment.project.name, environment.project %>:<%= link_to environment.name, [environment.project, environment] %></td>
-        <td><%= link_to "Reprovision", [:reprovision, environment], method: :put, class: 'btn btn-warning', data: { confirm: "Are you sure you want to reprovision this environment? Any failed instances will be reprovisioned in order"} %>
-      </tr>
-      <% instances.each do | instance | %>
-        <tr>
-          <td><%= instance.name %></td>
-          <td><%= instance.created_at %></td>
-          <td><%= instance.environment.product.name %></td>
-          <td><%= instance.status %></td>
-          <td><%= instance.error_description %></td>
-          <td><%= link_to "", [:edit, instance], class: "edit" %></td> 
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-  <table>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+    <li class="breadcrumb-item active">Provisioning Errors</li>
+  </ol>
+<div class="card">
+  <div class="card-block">
+    <div class="row">
+      <div class="col-xs-5">
+        <h4 class="card-title">Provisioning Errors</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Instance</th>
+              <th>Date</th>
+              <th>Product</th>
+              <th>Status</th>
+              <th>Error</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @instances.each do |environment, instances| %>
+              <tr>
+                <td colspan="5"><%= link_to environment.project.name, environment.project %>:<%= link_to environment.name, [environment.project, environment] %></td>
+                <td><%= link_to "Reprovision", [:reprovision, environment], method: :put, class: 'btn btn-warning', data: { confirm: "Are you sure you want to reprovision this environment? Any failed instances will be reprovisioned in order"} %></td>
+              </tr>
+              <% instances.each do | instance | %>
+                <tr>
+                  <td><%= instance.name %></td>
+                  <td><%= instance.created_at %></td>
+                  <td><%= instance.environment.product.name %></td>
+                  <td><%= instance.status %></td>
+                  <td><%= instance.error_description %></td>
+                  <td><%= link_to "", [:edit, instance], class: "edit" %></td> 
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

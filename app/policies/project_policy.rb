@@ -22,7 +22,11 @@ class ProjectPolicy < ApplicationPolicy
 	
   class Scope < Scope
     def resolve
-      scope.all
+      if user.has_role? :admin
+        scope.all
+      else
+        scope.joins(:users).where(projects_users: {user_id: user.id})
+      end
     end
   end
 end

@@ -3,6 +3,9 @@ class CloudInstance < ApplicationRecord
   serialize :init_config
 
   #after_create :provision_instance, on: :create
+  def to_s
+    name
+  end
 
   def cost
   	cost = 0
@@ -15,6 +18,19 @@ class CloudInstance < ApplicationRecord
     end
     super(value)
   end
+
+  def deprovision
+    self.update(status: 'DEPROVISIONED')
+    _deprovision
+  end
+
+  def provision
+    self.update(status: 'PROVISIONING')
+    _provision
+    wait
+    self.update(status: 'PROVISIONED')
+  end
+
 
 	#def self.instance_classes
   #  if subclasses.empty?

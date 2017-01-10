@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require jquery-ui/sortable
-//= require jquery-ui/effect-highlight
+//= require jquery-ui/widgets/sortable
+//= require jquery-ui/effects/effect-highlight
+//= require Chart.min
 //= require_tree .

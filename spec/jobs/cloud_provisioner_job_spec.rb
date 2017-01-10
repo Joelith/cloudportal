@@ -4,8 +4,8 @@ RSpec.describe CloudProvisionerJob, type: :job do
   
   it 'provisions cloud instances' do
     product = FactoryGirl.create(:product, name: 'Bronze Database')
-    FactoryGirl.create(:oracle_db, product: product)
-    environment = FactoryGirl.create(:environment)
+    FactoryGirl.create(:component_oracle_db, product: product)
+    environment = FactoryGirl.create(:environment_with_db)
     instances = environment.cloud_instances
     ids = instances.pluck(:id)
     expect{ CloudProvisionerJob.perform_now(ids) }.

@@ -1,0 +1,26 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+  <li class="breadcrumb-item"><%= link_to "Projects", projects_path %></li>
+  <li class="breadcrumb-item"><%= link_to @project.name, @project %></li>
+  <li class="breadcrumb-item"><%= link_to @environment.name, [@project, @environment] %></li>
+  <li class="breadcrumb-item active">Renew Environment</li>
+</ol>
+<div class="card">
+	<div class="card-header">
+    <i class="fa fa-edit"></i>Renew Environment - <%= @environment.name %>
+    <div class="card-actions">
+		  <%= link_to @project do %>
+      	<i class="fa fa-close"></i>
+      <% end %>
+    </div>
+  </div>   	
+  <div class="card-block">
+  <%= simple_form_for([@project, @environment]) do |f| %>
+      <%= f.input :end_date %>
+      <%= f.input :justification %>
+      
+      <%= f.button :submit, class: "btn-primary", title: 'Renew', value: 'Renew' %>
+    <% end %>
+
+	</div>
+</div>

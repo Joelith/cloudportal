@@ -63,6 +63,6 @@ class ProductsController < ApplicationController
 	end
 
 	def product_params
-  	params.require(:product).permit(:name, :description, cloud_components_attributes: [:id, :cloud_type, :config, :_destroy])
+  	params.require(:product).permit(:name, :description, :icon, cloud_components_attributes: [:id, :cloud_type, :config, :_destroy])
 	end
 end

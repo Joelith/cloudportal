@@ -1,13 +1,25 @@
-<div id="instnace">
+<div id="instance">
  <ol class="breadcrumb">
     <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
     <li class="breadcrumb-item"><%= link_to @project.name, @project %></li>
     <li class="breadcrumb-item"><%= link_to @environment.name, [@project, @environment] %></li>
-    <li class="breadcrumb-item active"><%= @instance.name %></li>
+    <li class="breadcrumb-item active"><%= @instance %></li>
   </ol>
-  <header>
-    <h1><%= @instance.name %></h1>
-  </header>
-  <%= render 'show', project: @project, environment: @environment, instance: @instance %>
-
+  <div class="card">
+    <div class="card-block">
+      <div class="row">
+        <div class="col-xs-5">
+          <h2 class="card-title"><%= @instance %></h2>
+        </div>
+      </div>
+      <% if @instance.fog.nil? then %>
+      	<div class="alert alert-danger" role="alert">
+  				<strong>Can't find instance</strong> This cloud instance may have been deleted through other means. Contact your administrator.
+  				<% if Rails.env.development? then %><br/>This can also be caused when restarting the rails server as fog instances in Mock mode are stored in memory and don't resume on restart.<% end %>
+				</div>
+      <% else %>
+				<%= render 'show', project: @project, environment: @environment, instance: @instance %>
+			<% end %>
+		</div>
+	</div>
 </div>

@@ -1,0 +1,33 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+  <li class="breadcrumb-item"><%= link_to "Users", users_path %></li>
+  <li class="breadcrumb-item active">New</li>
+
+</ol>
+<div class="card">
+	<div class="card-header">
+    <i class="fa fa-edit"></i>New User
+    <div class="card-actions">
+		  <%= link_to @user do %>
+      	<i class="fa fa-close"></i>
+      <% end %>
+    </div>
+  </div>   	
+  <div class="card-block">
+
+<%= simple_form_for(@user) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+    <%= f.input :password_confirmation, required: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Create" %>
+  </div>
+<% end %>
+
+	</div>
+</div>

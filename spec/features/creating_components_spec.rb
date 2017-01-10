@@ -7,10 +7,11 @@ RSpec.feature "Users can create new components in product" do
     product = FactoryGirl.create(:product, name: 'Bronze Database')
 
 		visit product_path(product)
-    click_link "Create Database"
   end
 
-  scenario "with valid attributes" do
+  scenario " - Oracle Cloud Database" do
+    click_link "Create Oracle Database Cloud Service"
+
     fill_in "Service name", with: "%PROJ_4%_%ENV_4%"
     select "SE", :from=>"cp_oraclecloud_database_component[edition]"
     select "Oc3", :from=>"cp_oraclecloud_database_component[shape]"

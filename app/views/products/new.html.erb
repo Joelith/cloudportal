@@ -1,7 +1,18 @@
-<header>
-  <h1>
-    New Product
-  </h1>
-</header>
-
-<%= render "form", product: @product %>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+  <li class="breadcrumb-item"><%= link_to "Products", products_path %></li>
+  <li class="breadcrumb-item active">New Product</li>
+</ol>
+<div class="card">
+	<div class="card-header">
+    <i class="fa fa-edit"></i>New Product
+    <div class="card-actions">
+		  <%= link_to products_path do %>
+      	<i class="fa fa-close"></i>
+      <% end %>
+    </div>
+  </div>   	
+  <div class="card-block">
+		<%= render "form", product: @product %>
+	</div>
+</div>

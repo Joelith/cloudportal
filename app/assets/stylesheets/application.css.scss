@@ -1,16 +1,8 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+/*@import "bootstrap-sprockets";
+@import "bootstrap";*/
 @import "font-awesome";
-
-
-.page-header {
-  position: relative;
-  padding-bottom: 0px;
-
-  &:first-child {
-    margin-top: 20px;
- }
-}
+@import "coreui";
+@import "font-awesome-extension";
 
 ul.actions {
   @extend .list-unstyled;
@@ -50,16 +42,6 @@ a.delete {
   }
 }
 
-header {
-  @extend .page-header;
-  position: relative;
-  padding-bottom: 0px;
-
-  &:first-child {
-    margin-top: 20px;
-  }
-}
-
 .alert-notice {
   @extend .alert-success;
 }
@@ -73,5 +55,110 @@ form {
 }
 
 body {
-  padding-top: 70px;
+  //padding-top: 70px;
 }
+
+header.navbar a.navbar-brand {
+  padding-top: 0px;
+}
+
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+    border-radius: .25rem;
+}
+
+.bd-callout-info {
+    border-left-color: #5bc0de;
+}
+
+.bd-callout-danger {
+  border-left-color: #d9534f;
+}
+.bd-callout p:last-child {
+    margin-bottom: 0;
+}
+/** Login Page **/
+.app-login {
+  background: #3D62B3;
+  min-height: 100vh !important;
+  width: 100%;
+}
+body .app-login > div:first-child {
+    margin-top: 0;
+    min-height: 100vh !important;
+}
+.flex-center {
+  height: 100%;
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.app-login .app-body {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+}
+.app-login .app-body .app-block {
+    transition: all 0.2s ease;
+    background-color: #FFF;
+    border-radius: 2px;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.app-login .app-body .app-block .app-form {
+    padding: 4rem;
+    position: relative;
+    -ms-flex: 1;
+    flex: 1;
+}
+.app-login .app-body .app-block .app-form .form-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 2em;
+    font-weight: 200;
+    color: #444;
+    margin-bottom: 4rem;
+}
+.app-login .app-body .app-block .app-form form {
+    min-width: 280px;
+}
+.input-group {
+  width: 100%;
+    margin-bottom: 15px;
+}
+.input-group .input-group-addon {
+    width: 40px;
+}
+.app-login .app-body .app-block .app-form form .btn-submit {
+    width: 100%;
+}
+

@@ -1,7 +1,17 @@
-<header>
-  <h1>
-    New Project
-  </h1>
-</header>
-
-<%= render "form", project: @project %>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+  <li class="breadcrumb-item active"><%= link_to "Projects", projects_path %></li>
+</ol>
+<div class="card">
+	<div class="card-header">
+    <i class="fa fa-edit"></i>New Project
+    <div class="card-actions">
+		  <%= link_to projects_path do %>
+      	<i class="fa fa-close"></i>
+      <% end %>
+    </div>
+  </div>   	
+  <div class="card-block">
+		<%= render "form", project: @project %>
+	</div>
+</div>

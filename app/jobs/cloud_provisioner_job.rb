@@ -13,8 +13,6 @@ class CloudProvisionerJob < ApplicationJob
       end
 			begin
         instance.provision
-		  	instance.wait
-  		  instance.update(status: 'PROVISIONED')
   		rescue ArgumentError => exception
         logger.fatal "Validation error in Job: #{exception.inspect}"
         instance.update(status: 'VALIDATION_ERROR', error_description: exception)

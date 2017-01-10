@@ -1,20 +1,45 @@
-<header>
-  <h1>Products</h1>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+    <li class="breadcrumb-item active">Products</li>
+  </ol>
+<div class="card">
+  <div class="card-block">
+    <div class="row">
+      <div class="col-xs-5">
+        <h4 class="card-title">Products</h4>
+      </div>
+      <div class="col-xs-7">
+        <% if policy(Product).new? %>
+          <div class="btn-group hidden-sm-down pull-right" role="group" aria-label="Second group">
+            <%= link_to "New Product", new_product_path,
+          class: "new" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
-	  <ul class="actions">
-      <% if policy(Product).new? %>
-	     <li><%= link_to "New Product", new_product_path,
-	      class: "new" %></li>
-      <% end %>
-    </ul>
-    
-</header>
+<div class="row">
 
-<div id="products">
   <% if @products.each do |product| %>
-    <h2><%= link_to product.name, product %></h2>
-    <p><%= product.description %></p>
+    <div class="col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-block">
+          <% if product.icon_stored? %>
+            <div class="h1 text-muted text-xs-center pull-left m-b-2 p-r-1">
+              <%= image_tag product.icon.thumb('50x50#').url %>
+            </div>
+          <% end %>
+          <div class="h4 m-a-0"><%= link_to product.name, product %></div>
+          <div class="p-b-1"><%= product.description %></div>
+          <small class="text-muted">Estimated Monthly Cost: <%= number_to_currency(product.monthly_cost) %></small>
+        </div>
+      </div>
+    </div>
   <% end.empty? %>
-    <p>No products</p>
+    <div class="col-xs-12">
+      <p>No Projects.</p>
+    </div>
   <% end %>
 </div>

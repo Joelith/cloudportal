@@ -1,0 +1,47 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+    <li class="breadcrumb-item active">Users</li>
+  </ol>
+<div class="card">
+  <div class="card-block">
+    <div class="row">
+      <div class="col-xs-5">
+        <h4 class="card-title">Users</h4>
+      </div>
+      <div class="col-xs-7">
+        <div class="btn-group hidden-sm-down pull-right" role="group" aria-label="Second group">
+          <%= link_to "New User", new_user_path,
+        class: "new" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <table class="table table-striped">
+        <thead class="thead-default">
+          <tr>
+            <th>Name</th>
+            <th>Activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @users.each do |user| %>
+            <tr>
+              <td>
+                <div><%= link_to user.email, user %></div>
+                <div class="small text-muted">
+                  Registered: <%= user.created_at.strftime('%b %e %Y') %>
+                </div>
+              </td>
+              <td>
+                <div class="small text-muted">Last login</div>
+                <strong><%= "#{time_ago_in_words(user.last_sign_in_at)} ago" unless user.last_sign_in_at.blank? %></strong>
+              </td>
+            </tr>
+          <% end.empty? %>
+            <tr><td colspan="2">No Users</td></tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

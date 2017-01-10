@@ -1,6 +1,6 @@
 class EnvironmentsController < ApplicationController
 	before_action :set_project, except: [:reprovision]
-	before_action :set_environment, only: [:show, :destroy]
+	before_action :set_environment, only: [:show, :destroy, :renew, :update]
 
 	def new
 		authorize Environment
@@ -21,6 +21,9 @@ class EnvironmentsController < ApplicationController
 
 	def show
 		authorize @environment
+		if @environment.expiring?
+			flash[:alert] = "This environment is set to expire soon. If you still need this environment please click the 'Renew' button below."
+		end
 	end
 
 	def destroy
@@ -39,6 +42,22 @@ class EnvironmentsController < ApplicationController
 		redirect_to errors_cloud_instances_path
 	end
 
+	def renew
+		authorize @environment
+	end
+
+	def update
+		authorize @environment
+		if @environment.update_attributes(environment_params)
+			flash[:notice] = "Environment has been renewed."
+			redirect_to [@project, @environment]
+		else
+			puts @environment.errors.inspect
+			flash.now[:alert] = "Environment has not been renewed."
+			render "renew"
+		end
+	end
+
 	private
 
 	def set_project
@@ -46,13 +65,13 @@ class EnvironmentsController < ApplicationController
 	end
 
 	def set_environment
-	  @environment = Environment.find(params[:id])
+		!params[:environment_id].nil? ? @environment = Environment.find(params[:environment_id]) : @environment = Environment.find(params[:id])
 	rescue ActiveRecord::RecordNotFound
 	  flash[:alert] = "The environment you were looking for could not be found."
 	  redirect_to product_path
 	end
 
 	def environment_params
-	  params.require(:environment).permit(:name, :start_date, :end_date, :description, :product_id)
+	  params.require(:environment).permit(:name, :start_date, :end_date, :description, :product_id, :justification)
 	end
 end

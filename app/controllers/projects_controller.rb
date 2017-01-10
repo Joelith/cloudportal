@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
 	def index
 		authorize Project
-		@projects = Project.all
+		@projects = policy_scope(Project)
   end
 
  	def new
@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
 	  @project = Project.new(project_params)
 
 	  if @project.save
+	  	@project.users << current_user
 	    flash[:notice] = "Project has been created."
 	    redirect_to @project
 	  else
@@ -51,6 +52,15 @@ class ProjectsController < ApplicationController
 		end
 	end
 
+	def select_team
+		@project = Project.find(params[:project_id])
+
+		respond_to do |format|
+	    format.html
+	    format.js
+	  end
+	end	
+
 	private
 
 	def set_project
@@ -61,6 +71,6 @@ class ProjectsController < ApplicationController
 	end
 
 	def project_params
-  	params.require(:project).permit(:name, :budget)
+  	params.require(:project).permit(:name, :budget, :description, :user_ids=>[])
 	end
  end

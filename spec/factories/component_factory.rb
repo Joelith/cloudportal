@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :oracle_db, class: 'CpOraclecloud::DatabaseComponent' do
+  factory :component_oracle_db, class: 'CpOraclecloud::DatabaseComponent' do
     service_name "%PROJ_4%-%ENV_4%-DB"
     edition "SE"
     shape "oc3"
@@ -21,4 +21,7 @@ FactoryGirl.define do
   	admin_username "weblogic"
   	admin_password "Welcome1$"
 	end
+  factory :component_ec2, class: 'CpAws::Ec2Component' do
+    name "%PROJ_4%-%ENV_4%-EC2"
+  end
 end

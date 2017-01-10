@@ -1,17 +1,39 @@
-<header>
-  <h1>Projects</h1>
-</header>
-<ul class="actions">
-  <% if policy(Project).new? %>
-    <li><%= link_to "Create Project", new_project_path,
-    class: "new" %></li>
-  <% end %>
-</ul>
-
-<div id="project">
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+  <li class="breadcrumb-item active">Projects</li>
+</ol>
+<div class="card">
+  <div class="card-block">
+    <div class="row">
+      <div class="col-xs-5">
+        <h4 class="card-title">Projects</h4>
+      </div>
+      <div class="col-xs-7">
+        <div class="btn-group hidden-sm-down pull-right">
+          <% if policy(Project).new? %>
+            <%= link_to "Create Project", new_project_path,
+    class: "new" %>
+          <% end %>     
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
   <% if @projects.each do |project| %>
-    <h2><%= link_to project.name, project %></h2>
+    <div class="col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-block">
+          <div class="h4 m-a-0"><%= link_to project.name, project %></div>
+          <div class="p-b-1"><%= project.description %></div>
+          <progress class="progress progress-xs progress-success m-a-0" value="<%= project.spend_against_budget %>" max="100"><%= project.spend_against_budget %>%</progress>
+          <small class="text-muted"><%= number_to_currency(project.current_spend) %>/<%= number_to_currency(project.budget) %></small>
+        </div>
+      </div>
+    </div>
   <% end.empty? %>
-    <p>No Projects.</p>
+    <div class="col-xs-12">
+      <p>No Projects.</p>
+    </div>
   <% end %>
 </div>

@@ -34,13 +34,17 @@ gem "font-awesome-rails", "~> 4.3"
 gem 'simple_form', git: 'https://github.com/kesha-antonov/simple_form', branch: 'rails-5-0'
 gem "devise"
 gem "pundit", "~> 0.3.0"
-gem "fog-oraclecloud"
 gem "cocoon"
 gem "enum_help"
-gem "cp_oraclecloud"
+gem "cp_oraclecloud", path: '../cp_oraclecloud'
 gem "acts_as_list"
 gem "jquery-ui-rails"
 gem "rolify"
+gem 'chartjs-ror'
+gem 'dragonfly'
+gem 'whenever', :require => false
+
+gem "cp_aws", path: '../cp_aws'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,6 +56,9 @@ group :test do
 	gem "capybara", "~>2.4"
 	gem "factory_girl_rails", "~> 4.5"
 	gem "rspec-wait"
+	gem "delorean"
+	gem "shoulda"
+	gem "whenever-test"
 end
 
 group :development do

@@ -7,7 +7,13 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
+  has_and_belongs_to_many :projects
+
   def assign_default_role
     self.add_role(:requestor) if self.roles.blank?
+  end
+
+  def to_label
+    "#{email}"
   end
 end
