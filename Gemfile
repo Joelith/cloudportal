@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem "bootstrap-sass", "~> 3.3"
 gem "font-awesome-rails", "~> 4.3"
-gem 'simple_form', git: 'https://github.com/kesha-antonov/simple_form', branch: 'rails-5-0'
+gem 'simple_form'
 gem "devise"
 gem "pundit", "~> 0.3.0"
 gem "cocoon"

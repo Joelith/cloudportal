@@ -24,3 +24,7 @@
 config/app_config.yml
 config/initializers/cp_oraclecloud.rb
 config/initializers/cp_aws.rb
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
