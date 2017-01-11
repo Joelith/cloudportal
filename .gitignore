@@ -30,3 +30,5 @@ config/initializers/cp_aws.rb
 !.elasticbeanstalk/*.global.yml
 
 config/deploy/demo.rb
+
+config/initializers/cloudportal.rb

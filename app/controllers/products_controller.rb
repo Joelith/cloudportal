@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
 
 	def show
 		authorize @product
-		@plugins = APP_CONFIG[:plugins]
+		@plugins = Cloudportal.plugins
 	end
 
 	def destroy

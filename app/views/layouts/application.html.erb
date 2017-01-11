@@ -42,7 +42,7 @@
 		        		<div class="dropdown-header text-xs-center">
 	                <strong>Plugins</strong>
 	              </div>
-	               <% APP_CONFIG[:plugins].each do | plugin | %>
+	               <% Cloudportal.plugins.each do | plugin | %>
                     <%= link_to plugin.camelize.constantize, polymorphic_path([plugin, :admin]), :class=>'dropdown-item' %>
                   <% end %>
 		        	</div>

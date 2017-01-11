@@ -4,10 +4,7 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(*Rails.groups)
-
-APP_CONFIG = YAML.load_file(File.expand_path "../app_config.yml", __FILE__)[Rails.env].symbolize_keys!
- 
+Bundler.require(*Rails.groups) 
 
 module Cloudportal
   class Application < Rails::Application
@@ -18,5 +15,11 @@ module Cloudportal
 
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
+  end
+
+  mattr_accessor :plugins
+
+  def self.setup
+    yield self
   end
 end
