@@ -28,3 +28,5 @@ config/initializers/cp_aws.rb
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+config/deploy/demo.rb
