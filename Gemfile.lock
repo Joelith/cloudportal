@@ -306,6 +306,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3)
   byebug
   capistrano
+  capistrano-bundler
   capistrano-rails
   capistrano-rvm
   capistrano3-puma
