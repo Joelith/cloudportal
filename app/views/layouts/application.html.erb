@@ -15,14 +15,15 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="navbar-fixed fixed-nav fixed-nav">
+  <body class="navbar-fixed fixed-nav">
   	<header class="navbar">
   		<div class="container-fluid">
+  			<button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">☰</button>
   			<a class="navbar-brand" href="#">Cloud Portal</a>
   			<ul class="nav navbar-nav hidden-md-down">
-          <!--<li class="nav-item">
-              <a class="nav-link navbar-toggler layout-toggler" href="#">☰</a>
-          </li>-->
+          <li class="nav-item hidden-md-up">
+              <a class="nav-link navbar-toggler sidebar-toggler layout-toggler" href="#">☰</a>
+          </li>
           <li class="nav-item p-x-1">
              	<%= link_to "Home", main_app.root_path, :class=>'nav-link' %>
           </li>
@@ -60,7 +61,41 @@
       	</ul>
   		</div>
   	</header>
-	  
+	  <div class="sidebar">
+	  	<nav class="sidebar-nav">
+	  		<ul class="nav">
+	  			<li class="nav-item">
+	  				<%= link_to "Home", main_app.root_path, :class=>'nav-link' %>
+          </li>
+          <li class="nav-item">
+          	<%= link_to "Products", products_path, :class=>'nav-link' %>
+          </li>
+          <% if current_user.has_role? :admin %>
+          	<li class="nav-title">Admin</li>
+						<% if policy(User).index? %>
+							<li class="nav-item">
+			      		<%= link_to "Users", users_path, :class=>'nav-link' %>
+			      	</li>
+			      <% end %>	        
+      			<% if policy(CloudInstance).errors? %>
+      				<li class="nav-item">
+								<%= link_to "Provisioning Errors", errors_cloud_instances_path, :class=>'nav-link' %>
+							</li>
+        		<% end %>
+        		<li class="nav-title">Plugins</li>
+           	<% Cloudportal.plugins.each do | plugin | %>
+           	  <li class="nav-item">
+            		<%= link_to plugin.camelize.constantize, polymorphic_path([plugin, :admin]), :class=>'nav-link' %>
+            	</li>
+            <% end %>
+	        <% end %>
+	        <li class="nav-item">
+	        	<%= link_to "Sign out", main_app.destroy_user_session_path,
+					        method: :delete, :class=>'nav-link' %>
+					</li>
+	  		</ul>
+	  	</nav>
+	  </div>
   	<main class="main">
   		<!--<ol class="breadcrumb">
   			<li class="breadcrumb-item"><%= link_to "Home", main_app.root_path %></li>

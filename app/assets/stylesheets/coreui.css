@@ -4594,7 +4594,8 @@ header.navbar {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 70px auto;
-    border-bottom: 1px solid #cfd8dc; }
+    border-bottom: 1px solid #cfd8dc;
+    text-align: center; }
 
 header.navbar .navbar-brand {
   margin-right: 0; }

@@ -18,3 +18,4 @@
 //= require jquery-ui/effects/effect-highlight
 //= require Chart.min
 //= require_tree .
+
