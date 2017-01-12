@@ -2,11 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include Pundit
 
-	if Rails.env.development? or Rails.env.testing? then
-		Fog.mock!
-		Fog::Mock.delay = 5
-	end
-
 	before_action :authenticate_user!
 
 	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized

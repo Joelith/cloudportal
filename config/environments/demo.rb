@@ -83,7 +83,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.provision_immediately = false
+  Fog.mock!
+  Fog::Mock.delay = 5
 
+  config.provision_immediately = true
 
 end

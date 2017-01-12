@@ -96,7 +96,7 @@ class Environment < ApplicationRecord
   end
 
   def build_instances
-  	if Rails.env.development?
+  	if Rails.application.config.provision_immediately
   		CloudProvisionerJob.perform_later(cloud_instances.pluck(:id))
  	 	else
   		CloudProvisionerJob.set(wait_until: start_date.at_beginning_of_day).perform_later(cloud_instances.pluck(:id))
