@@ -32,3 +32,6 @@ config/initializers/cp_aws.rb
 config/deploy/demo.rb
 
 config/initializers/cloudportal.rb
+
+# Ignore Dragonfly images
+public/system/dragonfly
