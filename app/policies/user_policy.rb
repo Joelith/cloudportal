@@ -1,7 +1,7 @@
 class UserPolicy < ApplicationPolicy
 
 	def create?
-    user.has_role? :admin
+    user.has_role? :admin && !Rails.env.development
   end
 
   def index?
@@ -9,15 +9,15 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.has_role? :admin
+    user.has_role? :admin && !Rails.env.development
 	end
 
 	def update?
-    user.has_role? :admin
+    user.has_role? :admin && !Rails.env.development
 	end
 
 	def destroy?
-    user.has_role? :admin
+    user.has_role? :admin && !Rails.env.development
 	end
 	
   class Scope < Scope
