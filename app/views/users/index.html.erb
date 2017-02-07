@@ -10,8 +10,10 @@
       </div>
       <div class="col-xs-7">
         <div class="btn-group pull-right" role="group" aria-label="Second group">
-          <%= link_to "New User", new_user_path,
+          <% if policy(User).new? %>
+            <%= link_to "New User", new_user_path,
         class: "new" %>
+          <% end %>
         </div>
       </div>
     </div>
